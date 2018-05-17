@@ -49,11 +49,12 @@
     </div>
 </body>
 <script>
-        let nosleep = new NoSleep();
-        nosleep.enable();
+        const nosleep;
         const code = document.querySelector("#code");
         const fi = document.querySelector("#forceInput");
         fi.onclick = () => {
+            nosleep = new NoSleep();
+            nosleep.enable();
             fi.style.display = "none";
             code.style.display = "block";
         };
