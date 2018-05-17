@@ -5,18 +5,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="kinaszkit/js/socket.io.js"></script>
-    <title>Vibrate</title>
+    <script src="js/NoSleep.min.js"></script>
+    <title>Kinaszkit-Vibe</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: rgb(20, 37, 15);
+            height: 100vh;
+            display: grid;
+            align-items: center;
+            justify-items: center;
+        }
+
+        #codeWarpper {
+            margin: auto;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            color: white;
+            font-size: 5rem;
+            background: rgb(30, 83, 0);
+            padding: 3rem;
+            border-radius: 5px;
+        }
+
+        #forceInput {
+            width: 100%;
+            height: 100%;
+        }
+
+        #code {
+            display: none;
+        }
+    </style>
 </head>
 <body>
-    <script>
-    		const socket = io("http://gabirat.pl:1790");
-			socket.on("code", (data) => {
-				document.write(data);
-            });
-            socket.on("vibrate", () => {
-                console.log("BRRRRRRRRRRRRRR");
-				navigator.vibrate(100);
-			});
-    </script>
+    <div id="codeWarpper">
+        <div id="forceInput">Generuj kod</div>
+        <div id="code"></div>
+    </div>
 </body>
+<script>
+        let nosleep = new NoSleep();
+        nosleep.enable();
+        const code = document.querySelector("#code");
+        const fi = document.querySelector("#forceInput");
+        fi.onclick = () => {
+            fi.style.display = "none";
+            code.style.display = "block";
+        };
+
+        const socket = io("http://gabirat.pl:1790");
+        socket.on("code", (data) => {
+            code.innerHTML = data;
+        });
+        socket.on("vibrate", () => {
+            console.log("BRRRRRRRRRRRRRR");
+            navigator.vibrate(100);
+        });
+</script>
 </html>
