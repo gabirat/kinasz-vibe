@@ -30,8 +30,8 @@ io.on("connection", socket => {
 
 app.get('/key/:key', (req, res) => {
     for (const s of clients) {
-        console.log(s.key, req.params.key);
-        if (s.key == req.params.key) {
+        console.log(s.key, req.params.key.toUppercase());
+        if (s.key == req.params.key.toUppercase()) {
             console.log("VIBRATE SENT");
             s.socket.emit("vibrate", {});
         }
