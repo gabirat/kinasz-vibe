@@ -16,7 +16,7 @@ app.use("/css", express.static(__dirname + "/css"));
 function generateRandomCode() {
     let code = '';
     for (let i = 0; i < 5; i++)
-        code += String.fromCharCode(Math.floor(Math.random() * 70) + 30);
+        code += String.fromCharCode(Math.floor(Math.random() * 25) + 65);
     return code;
 }
 
